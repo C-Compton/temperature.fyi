@@ -1,5 +1,5 @@
 [build]
-	command = "ng build --prod && make build"
+	command = "make build && ng build --prod"
 	functions = "functions"
 [build.environment]
 	GO_IMPORT_PATH = "github.com/C-Compton/aws-lambda-golang"

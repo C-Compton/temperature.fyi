@@ -1,12 +1,10 @@
-<div class="container pt-3">
-  <div nz-row nzType="flex" nzJustify="center">
-    <div nz-col>
-      <h1 nz-title>Temperature.fyi</h1>
-    </div>
+<div nz-row nzType="flex" nzJustify="center">
+  <div nz-col>
+    <h1 nz-title>Temperature.fyi</h1>
   </div>
-  <div nz-row nzType="flex" nzJustify="center">
-    <div nz-col nzSpan="8">
-      <app-search-input></app-search-input>
-    </div>
+</div>
+<div nz-row nzType="flex" nzJustify="center">
+  <div nz-col nzSpan="8">
+    <app-search-input (search)="handleSearch($event)"></app-search-input>
   </div>
 </div>

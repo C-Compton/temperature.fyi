@@ -1,0 +1,13 @@
+<nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+  <input
+    [formControl]="searchText"
+    type="text"
+    nz-input
+    placeholder="Search..."
+  />
+</nz-input-group>
+<ng-template #suffixButton>
+  <button nz-button nzType="primary" nzSearch (click)="submit()">
+    Search
+  </button>
+</ng-template>

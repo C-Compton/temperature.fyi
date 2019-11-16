@@ -57,10 +57,13 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	log.Print("IsBase64Encoded")
 	log.Printf("    %t\n", request.IsBase64Encoded)
 
+	newHeaders :=  make(map[string]string)
+	newHeaders["NewKey"] = "New value"
+	
 	return &events.APIGatewayProxyResponse{StatusCode: 200,
 		Headers: request.Headers,
 		MultiValueHeaders: request.MultiValueHeaders,
-		Body: request.Body,
+		Body: "Just a new response body",
 	}, nil
 }
 

@@ -17,6 +17,55 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	var returnBody string = ""
 	var returnCode int = -1
 
+	log.Print("request.Resource")
+	log.Printf("    %s\n", request.Resource)
+	log.Print("request.Path")
+	log.Printf("    %s\n", request.Path)
+	log.Print("request.HTTPMethod")
+	log.Printf("    %s\n", request.HTTPMethod)
+
+	log.Print("request.Headers")
+	for key, value := range request.Headers {
+		log.Printf("    %s: %s\n", key, value)
+	}
+
+	log.Printf("request.MulltiValueHeaders")
+	for key, values := range request.MultiValueHeaders {
+		log.Printf("    key: %s [\n", key)
+		for value := range values {
+			log.Printf("        %v\n", value)
+		}
+	}
+
+	log.Print("request.QueryStringParameters")
+	for key, value := range request.QueryStringParameters {
+		log.Printf("    %s: %s\n", key, value)
+	}
+
+	log.Printf("    %s\n", request.MultiValueQueryStringParameters)
+	for key, values := range request.MultiValueQueryStringParameters {
+		log.Printf("    key: %s [\n", key)
+		for value := range values {
+			log.Printf("        %v\n", value)
+		}
+	}
+
+	log.Print("request.PathParameters")
+	for key, value := range request.PathParameters {
+		log.Printf("    %s: %s\n", key, value)
+	}
+
+	log.Print("request.StageVariables")
+	for key, value := range request.StageVariables {
+		log.Printf("    %s: %s\n", key, value)
+	}
+
+	log.Print("request.Body")
+	log.Printf("    %s\n", request.Body)
+
+	log.Print("IsBase64Encoded")
+	log.Printf("    %t\n", request.IsBase64Encoded)
+
 	if request.HTTPMethod != http.MethodGet {
 		returnCode = 405
 		returnBody = "Method not allowed: " + request.HTTPMethod
@@ -67,7 +116,6 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 	client := &http.Client{}
 
-	log.Println(client)
 	resp, err := client.Do(myRequest)
 	if err != nil {
 		returnCode = resp.StatusCode

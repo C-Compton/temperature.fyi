@@ -1,69 +1,71 @@
 package main
 
 import (
-	"log"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"strings"
+
 	"github.com/aws/aws-lambda-go/events"
-        "github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-lambda-go/lambda"
 )
+
+const PATH = "/.netlify/functions/rest"
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 
-	log.Print("request.Resource")
-	log.Printf("    %s\n", request.Resource)
-	log.Print("request.Path")
-	log.Printf("    %s\n", request.Path)
-	log.Print("request.HTTPMethod")
-	log.Printf("    %s\n", request.HTTPMethod)
-
-	log.Print("request.Headers")
-	for key, value := range request.Headers {
-		log.Printf("    %s: %s\n", key, value)
+	var returnBody string
+	var returnCode int
+	api_url, present := os.LookupEnv("API_URL")
+	if present == false {
+		returnCode = 500
+		returnBody = "Server error, missing environment url"
+		return &events.APIGatewayProxyResponse{StatusCode: returnCode,
+			Body: returnBody,
+		}, nil
 	}
 
-	log.Printf("request.MulltiValueHeaders")
-	for key, values := range request.MultiValueHeaders {
-		log.Printf("    key: %s [\n", key)
-		for value := range values {
-			log.Printf("        %s\n", value)
-		}
+	api_key, present := os.LookupEnv("API_KEY")
+	if present == false {
+		returnCode = 500
+		returnBody = "Server error, missing api key"
+		return &events.APIGatewayProxyResponse{StatusCode: returnCode,
+			Body: returnBody,
+		}, nil
 	}
 
-	log.Print("request.QueryStringParameters")
-	for key, value := range request.QueryStringParameters {
-		log.Printf("    %s: %s\n", key, value)
+	requestUrl := strings.Replace(request.Path, PATH, api_url, -1)
+
+	myRequest, err := http.NewRequest(http.MethodGet, requestUrl, nil)
+	if err != nil {
+		returnCode = 500
+		returnBody = "Server error creating new request"
+		return &events.APIGatewayProxyResponse{StatusCode: returnCode,
+			Body: returnBody,
+		}, err
 	}
 
-	log.Printf("    %s\n", request.MultiValueQueryStringParameters)
-	for key, values := range request.MultiValueQueryStringParameters {
-		log.Printf("    key: %s [\n", key)
-		for value := range values {
-			log.Printf("        %s\n", value)
-		}
+	myRequest.Header.Add("Authorization", api_key)
+
+	client := &http.Client{}
+
+	resp, err := client.Do(myRequest)
+	if err != nil {
+		returnCode = resp.StatusCode
+		returnBody = resp.Body.Close().Error()
+		return &events.APIGatewayProxyResponse{StatusCode: returnCode,
+			Body: returnBody,
+		}, err
 	}
 
-	log.Print("request.PathParameters")
-	for key, value := range request.PathParameters {
-		log.Printf("    %s: %s\n", key, value)
-	}
-	
-	log.Print("request.StageVariables")
-	for key, value := range request.StageVariables {
-		log.Printf("    %s: %s\n", key, value)
-	}
-	
-	log.Print("request.Body")
-	log.Printf("    %s\n", request.Body)
+	returnCode = resp.StatusCode
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
 
-	log.Print("IsBase64Encoded")
-	log.Printf("    %t\n", request.IsBase64Encoded)
+	returnBody = string(body[len(body)])
 
-	newHeaders :=  make(map[string]string)
-	newHeaders["NewKey"] = "New value"
-	
-	return &events.APIGatewayProxyResponse{StatusCode: 200,
-		Headers: request.Headers,
-		MultiValueHeaders: request.MultiValueHeaders,
-		Body: "Just a new response body",
+	return &events.APIGatewayProxyResponse{StatusCode: returnCode,
+		Body: returnBody,
 	}, nil
 }
 

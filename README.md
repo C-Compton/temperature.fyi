@@ -27,29 +27,28 @@
 	"resource": "some resource",
 	"path": "/path/",
 	"httpMethod": "GET",
-	"headers": [
-		"Accept: Something",
-		"Header-2: Value"
-	],
+	"headers": {
+		"Accept": "Something",
+		"Header-2": "Value"
+	},
 	"multiValueHeaders": {
 		"HeaderName": ["Value1", "Value2"],
 		"HeaderName2": ["another-value"]
 	},
-	"queryStringParameters": [
-		"q=something",
-		"limit=100"
-	],
+	"queryStringParameters": {
+		"q": "something",
+		"limit": "100"
+	},
 	"multiValueQueryStringParameters": {
 		"sort": ["href asc", "name desc"]
 	},
-	"pathParameters": [
-		"id",
-		"otherId"
-	],
-	"stageVariables": [
-		"whatever-this-is"
-	],
-	"requestContext": "stringRepresentationOfWhateverThisIs",
+	"pathParameters": {
+		"id": "someId",
+		"otherId": "someOtherId"
+	},
+	"stageVariables": {
+		"key": "value"
+	},
 	"body": "some body once told me",
 	"isBase64Encoded": true
 }

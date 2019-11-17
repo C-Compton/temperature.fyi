@@ -126,6 +126,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	}
 
 	myRequest.Header.Add("Authorization", api_key)
+	myRequest.Header.Add("Accept", "application/json")
 
 	client := &http.Client{}
 

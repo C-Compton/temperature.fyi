@@ -15,6 +15,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 	const PATH_TO_LAMBDA = "/.netlify/functions/rest"
 	const URL_OF_OTHER = "https://app.climate.azavea.com"
+
 	var returnBody string
 	var returnCode int
 
@@ -127,6 +128,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 	returnBody = string(body[:])
 	returnBody = strings.ReplaceAll(returnBody, URL_OF_OTHER, TEMPERATURE_FYI_URL+PATH_TO_LAMBDA)
+
 	returnHeader := make(map[string]string)
 	returnHeader["Content-type"] = "application/json"
 	return &events.APIGatewayProxyResponse{

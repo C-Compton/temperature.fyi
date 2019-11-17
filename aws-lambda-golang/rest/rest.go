@@ -13,7 +13,8 @@ import (
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 
-	const PATH = "/.netlify/functions/rest"
+	const PATH_TO_LAMBDA = "/.netlify/functions/rest"
+	const URL_OF_OTHER = "https://app.climate.azavea.com"
 	var returnBody string
 	var returnCode int
 
@@ -32,6 +33,17 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	log.Print("request.QueryStringParameters")
 	for key, value := range request.QueryStringParameters {
 		log.Printf("    %s: %s\n", key, value)
+	}
+
+	TEMPERATURE_FYI_URL, present := os.LookupEnv("URL")
+	if present == false {
+		returnCode = 500
+		returnBody = "Server side error"
+		log.Fatal("Missing URL environment variable")
+		return &events.APIGatewayProxyResponse{
+			StatusCode: returnCode,
+			Body:       returnBody,
+		}, nil
 	}
 
 	api_url, present := os.LookupEnv("API_URL")
@@ -56,7 +68,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		}, nil
 	}
 
-	requestUrl := strings.Replace(request.Path, PATH, api_url, -1)
+	requestUrl := strings.Replace(request.Path, PATH_TO_LAMBDA, api_url, -1)
 
 	i := 0
 	l := len(request.QueryStringParameters)
@@ -114,6 +126,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	}
 
 	returnBody = string(body[:])
+	returnBody = strings.ReplaceAll(returnBody, URL_OF_OTHER, TEMPERATURE_FYI_URL+PATH_TO_LAMBDA)
 	returnHeader := make(map[string]string)
 	returnHeader["Content-type"] = "application/json"
 	return &events.APIGatewayProxyResponse{

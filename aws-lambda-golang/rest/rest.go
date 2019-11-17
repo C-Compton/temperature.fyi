@@ -145,9 +145,11 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	body, err := ioutil.ReadAll(resp.Body)
 
 	returnBody = string(body[:])
-
+	returnHeader := make(map[string]string)
+	returnHeader["Content-type"] = "application/json"
 	return &events.APIGatewayProxyResponse{
 		StatusCode: returnCode,
+		Headers:    returnHeader,
 		Body:       returnBody,
 	}, nil
 }

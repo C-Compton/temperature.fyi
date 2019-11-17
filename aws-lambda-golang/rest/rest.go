@@ -100,6 +100,19 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 	requestUrl := strings.Replace(request.Path, PATH, api_url, -1)
 
+	i := 0
+	l := len(request.QueryStringParameters)
+	if l > 0 {
+		requestUrl = requestUrl + "?"
+		for key, value := range request.QueryStringParameters {
+			requestUrl = requestUrl + key + "=" + value
+			i++
+			if i < l {
+				requestUrl += "&"
+			}
+		}
+	}
+
 	log.Println("Request URL: " + requestUrl)
 
 	myRequest, err := http.NewRequest(http.MethodGet, requestUrl, nil)

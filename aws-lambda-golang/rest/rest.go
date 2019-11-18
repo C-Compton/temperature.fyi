@@ -131,6 +131,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 	returnHeader := make(map[string]string)
 	returnHeader["Content-type"] = "application/json"
+	returnHeader["Access-Control-Allow-Origin"] = "http://localhost:4200"
 	return &events.APIGatewayProxyResponse{
 		StatusCode: returnCode,
 		Headers:    returnHeader,

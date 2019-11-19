@@ -1,13 +1,17 @@
-<nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-  <input
-    [formControl]="searchText"
-    type="text"
-    nz-input
-    placeholder="Search..."
-  />
-</nz-input-group>
-<ng-template #suffixButton>
-  <button nz-button nzType="primary" nzSearch (click)="submit()">
-    Search
-  </button>
-</ng-template>
+<nz-select
+  nzShowSearch
+  nzServerSearch
+  nzPlaceHolder="Search..."
+  [(ngModel)]="selectedValue"
+  [nzShowArrow]="false"
+  [nzFilterOption]="nzFilterOption"
+  (nzOnSearch)="getCities($event)"
+  (ngModelChange)="emit()"
+>
+  <nz-option
+    *ngFor="let o of listOfOption"
+    [nzLabel]="o.text"
+    [nzValue]="o.value"
+  >
+  </nz-option>
+</nz-select>

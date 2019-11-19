@@ -1,0 +1,19 @@
+<div *ngIf="data">
+  <div>
+    <h1 nz-title>
+      {{ data.city.properties.name }}, {{ data.city.properties.admin }}
+    </h1>
+  </div>
+  <div>
+    <h4 nz-title>Population: {{ data.city.properties.population }}</h4>
+  </div>
+  <div>
+    <h4 nz-title>
+      Corodinates: {{ data.city.geometry.coordinates[0] }} ,
+      {{ data.city.geometry.coordinates[1] }}
+    </h4>
+  </div>
+  <div>
+    <!-- Charts going here-->
+  </div>
+</div>

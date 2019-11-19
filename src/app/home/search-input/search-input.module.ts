@@ -4,7 +4,8 @@ import { SearchInputComponent } from "./search-input.component";
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzButtonModule } from "ng-zorro-antd/button";
 import { NzIconModule } from "ng-zorro-antd/icon";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { NzSelectModule } from "ng-zorro-antd";
 
 @NgModule({
   declarations: [SearchInputComponent],
@@ -13,6 +14,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     NzInputModule,
     NzButtonModule,
     NzIconModule,
+    NzSelectModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   exports: [SearchInputComponent]

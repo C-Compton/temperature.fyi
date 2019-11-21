@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-home",
@@ -7,10 +7,13 @@ import { Router } from '@angular/router';
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent {
+  public selectedValue = null;
+  public listOfOption: Array<{ value: string; text: string }> = [];
+  public nzFilterOption = () => true;
+
   constructor(private router: Router) {}
 
   public handleSearch($event): void {
-    console.log($event);
-    this.router.navigate(['./search/' + $event])
+    this.router.navigate(["./search/" + $event]);
   }
 }

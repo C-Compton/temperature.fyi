@@ -1,19 +1,30 @@
 <div *ngIf="data">
   <div>
     <h1 nz-title>
-      {{ data.city.properties.name }}, {{ data.city.properties.admin }}
+      {{ data[0].city.properties.name }}, {{ data[0].city.properties.admin }}
     </h1>
   </div>
   <div>
-    <h4 nz-title>Population: {{ data.city.properties.population }}</h4>
+    <h4 nz-title>Population: {{ data[0].city.properties.population }}</h4>
   </div>
   <div>
     <h4 nz-title>
-      Corodinates: {{ data.city.geometry.coordinates[0] }} ,
-      {{ data.city.geometry.coordinates[1] }}
+      Corodinates: {{ data[0].city.geometry.coordinates[0] }} ,
+      {{ data[0].city.geometry.coordinates[1] }}
     </h4>
   </div>
   <div>
-    <!-- Charts going here-->
+    <highcharts-chart
+      [Highcharts]="Highcharts"
+      [options]="chartOptions"
+      [(update)]="updateFlag"
+      style="width: 100%; height: 400px; display: block;"
+    ></highcharts-chart>
   </div>
 </div>
+<nz-spin
+  class="page-spinner"
+  nzSimple
+  [nzSize]="'large'"
+  [nzSpinning]="loading"
+></nz-spin>

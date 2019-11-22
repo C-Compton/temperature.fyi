@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "src/app/services/data.service";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { switchMap } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { Observable, forkJoin } from "rxjs";
 
 @Component({
   selector: "app-location-detail-container",
@@ -19,7 +19,11 @@ export class LocationDetailContainerComponent implements OnInit {
   ngOnInit() {
     this.data = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        return this.dataService.getCityData(params.get("id"));
+        let id = params.get("id");
+        return forkJoin([
+          this.dataService.getMaxTempAverage(id),
+          this.dataService.getMinTempAverage(id)
+        ]);
       })
     );
   }

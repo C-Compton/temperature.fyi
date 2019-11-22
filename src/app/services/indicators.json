@@ -1,0 +1,1593 @@
+[
+    {
+      "name": "accumulated_freezing_degree_days",
+      "label": "Accumulated Freezing Degree Days",
+      "description": "Maximum cumulative total of differences in average daily temperature and freezing for consecutive days across the aggregation period.",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax",
+        "tasmin"
+      ],
+      "available_units": [
+        "C",
+        "F",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "average_high_temperature",
+      "label": "Average High Temperature",
+      "description": "Aggregated average high temperature, generated from daily data using all requested models",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax"
+      ],
+      "available_units": [
+        "F",
+        "C",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "average_low_temperature",
+      "label": "Average Low Temperature",
+      "description": "Aggregated average low temperature, generated from daily data using all requested models",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmin"
+      ],
+      "available_units": [
+        "F",
+        "C",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "cooling_degree_days",
+      "label": "Cooling Degree Days",
+      "description": "Total difference of daily average temperature to a reference base temperature ",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax",
+        "tasmin"
+      ],
+      "available_units": [
+        "C",
+        "F",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "basetemp",
+          "description": "The base temperature used to calculate the daily difference for degree days summations. Defaults to 65. See the 'basetemp_units' for a discussion of the units this value uses.",
+          "required": false,
+          "default": 65
+        },
+        {
+          "name": "basetemp_units",
+          "description": "Units for the value of the 'basetemp' parameter. Defaults to 'F'.",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "diurnal_temperature_range",
+      "label": "Diurnal Temperature Range",
+      "description": "Average difference between daily max and daily min temperature",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax",
+        "tasmin"
+      ],
+      "available_units": [
+        "C",
+        "F",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "dry_spells",
+      "label": "Dry Spells",
+      "description": "Total number of times per period that there are 5 or more consecutive days without precipitation",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "pr"
+      ],
+      "available_units": [
+        "count"
+      ],
+      "default_units": "count",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "count"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "extreme_cold_events",
+      "label": "Extreme Cold Events",
+      "description": "Total number of times per period daily minimum temperature is below the specified percentile of historic observations",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmin"
+      ],
+      "available_units": [
+        "count"
+      ],
+      "default_units": "count",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "historic_range",
+          "description": "The 30 year range of past years used to define the historic norm. Get the available options by querying the historic ranges endpoint. Defaults to the most recent period in the historical data.",
+          "required": false,
+          "default": "1971"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "percentile",
+          "description": "The percentile threshold used to determine the appropriate comparative level of an event or measurement. Must be an integer in the range [0,100]. Defaults to 1",
+          "required": false,
+          "default": 1
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "count"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "extreme_heat_events",
+      "label": "Extreme Heat Events",
+      "description": "Total number of times per period daily maximum temperature exceeds the specified percentile of historic observations",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax"
+      ],
+      "available_units": [
+        "count"
+      ],
+      "default_units": "count",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "historic_range",
+          "description": "The 30 year range of past years used to define the historic norm. Get the available options by querying the historic ranges endpoint. Defaults to the most recent period in the historical data.",
+          "required": false,
+          "default": "1971"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "percentile",
+          "description": "The percentile threshold used to determine the appropriate comparative level of an event or measurement. Must be an integer in the range [0,100]. Defaults to 99",
+          "required": false,
+          "default": 99
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "count"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "extreme_precipitation_events",
+      "label": "Extreme Precipitation Events",
+      "description": "Total number of times per period daily average precipitation rate exceeds the specified percentile of historic observations",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "pr"
+      ],
+      "available_units": [
+        "count"
+      ],
+      "default_units": "count",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "historic_range",
+          "description": "The 30 year range of past years used to define the historic norm. Get the available options by querying the historic ranges endpoint. Defaults to the most recent period in the historical data.",
+          "required": false,
+          "default": "1971"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "percentile",
+          "description": "The percentile threshold used to determine the appropriate comparative level of an event or measurement. Must be an integer in the range [0,100]. Defaults to 99",
+          "required": false,
+          "default": 99
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "count"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "frost_days",
+      "label": "Frost Days",
+      "description": "Number of days per period in which the daily low temperature is below the freezing point of water",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmin"
+      ],
+      "available_units": [
+        "days"
+      ],
+      "default_units": "days",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "days"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "heat_wave_duration_index",
+      "label": "Heat Wave Duration Index",
+      "description": "Maximum period of consecutive days with daily high temperature greater than 5C above historic norm",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax",
+        "historical_tasmax"
+      ],
+      "available_units": [
+        "days"
+      ],
+      "default_units": "days",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "historic_range",
+          "description": "The 30 year range of past years used to define the historic norm. Get the available options by querying the historic ranges endpoint. Defaults to the most recent period in the historical data.",
+          "required": false,
+          "default": "1971"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "days"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "heat_wave_incidents",
+      "label": "Heat Wave Incidents",
+      "description": "Number of times daily high temperature exceeds 5C above historic norm for at least 5 consecutive days",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax",
+        "historical_tasmax"
+      ],
+      "available_units": [
+        "count"
+      ],
+      "default_units": "count",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "historic_range",
+          "description": "The 30 year range of past years used to define the historic norm. Get the available options by querying the historic ranges endpoint. Defaults to the most recent period in the historical data.",
+          "required": false,
+          "default": "1971"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "count"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "heating_degree_days",
+      "label": "Heating Degree Days",
+      "description": "Total difference of daily average temperature to a reference base temperature",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax",
+        "tasmin"
+      ],
+      "available_units": [
+        "C",
+        "F",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "basetemp",
+          "description": "The base temperature used to calculate the daily difference for degree days summations. Defaults to 65. See the 'basetemp_units' for a discussion of the units this value uses.",
+          "required": false,
+          "default": 65
+        },
+        {
+          "name": "basetemp_units",
+          "description": "Units for the value of the 'basetemp' parameter. Defaults to 'F'.",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "max_consecutive_dry_days",
+      "label": "Max Consecutive Dry Days",
+      "description": "Maximum number of consecutive days with no precipitation",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "pr"
+      ],
+      "available_units": [
+        "days"
+      ],
+      "default_units": "days",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "days"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "max_high_temperature",
+      "label": "Maximum High Temperature",
+      "description": "Maximum high temperature, generated from daily data using all requested models",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax"
+      ],
+      "available_units": [
+        "F",
+        "C",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "max_temperature_threshold",
+      "label": "Max Temperature Threshold",
+      "description": "Number of days where high temperature, generated from daily data using all requested models, fulfils the comparison",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax"
+      ],
+      "available_units": [
+        "days"
+      ],
+      "default_units": "days",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "threshold",
+          "description": "Required. The value against which to compare climate data values in the unit specified by the 'threshold_units' parameter.",
+          "required": true
+        },
+        {
+          "name": "threshold_comparator",
+          "description": "Required. The comparison type against the value of the 'threshold' parameter. Options: lt, gt, lte, gte. Signify: less than, greater than, less than or equals...",
+          "required": true
+        },
+        {
+          "name": "threshold_units",
+          "description": "Required. Units for the value of the 'threshold' parameter. Must be a valid unit recognized by the API. Options: ['F', 'C', 'K']",
+          "required": true
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "days"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "min_low_temperature",
+      "label": "Minimum Low Temperature",
+      "description": "Minimum low temperature, generated from daily data using all requested models",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmin"
+      ],
+      "available_units": [
+        "F",
+        "C",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "min_temperature_threshold",
+      "label": "Min Temperature Threshold",
+      "description": "Number of days where min temperature, generated from daily data using all requested models, fulfils the comparison",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmin"
+      ],
+      "available_units": [
+        "days"
+      ],
+      "default_units": "days",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "threshold",
+          "description": "Required. The value against which to compare climate data values in the unit specified by the 'threshold_units' parameter.",
+          "required": true
+        },
+        {
+          "name": "threshold_comparator",
+          "description": "Required. The comparison type against the value of the 'threshold' parameter. Options: lt, gt, lte, gte. Signify: less than, greater than, less than or equals...",
+          "required": true
+        },
+        {
+          "name": "threshold_units",
+          "description": "Required. Units for the value of the 'threshold' parameter. Must be a valid unit recognized by the API. Options: ['F', 'C', 'K']",
+          "required": true
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "days"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "percentile_high_temperature",
+      "label": "Percentile High Temperature",
+      "description": "The specified percentile of high temperature for each timespan. Defaults to 50th percentile (Median)",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmax"
+      ],
+      "available_units": [
+        "F",
+        "C",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "percentile",
+          "description": "The percentile threshold used to determine the appropriate comparative level of an event or measurement. Must be an integer in the range [0,100]. Defaults to 50",
+          "required": false,
+          "default": 50
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "percentile_low_temperature",
+      "label": "Percentile Low Temperature",
+      "description": "The specified percentile of low temperature for each timespan. Defaults to 50th percentile (Median)",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "tasmin"
+      ],
+      "available_units": [
+        "F",
+        "C",
+        "K"
+      ],
+      "default_units": "F",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "percentile",
+          "description": "The percentile threshold used to determine the appropriate comparative level of an event or measurement. Must be an integer in the range [0,100]. Defaults to 50",
+          "required": false,
+          "default": 50
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "F"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "percentile_precipitation",
+      "label": "Percentile Precipitation",
+      "description": "The specified percentile of precipitation rate for each timespan. Defaults to 50th percentile (Median)",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "pr"
+      ],
+      "available_units": [
+        "kg/m^2/s",
+        "mm/day",
+        "in/day"
+      ],
+      "default_units": "in/day",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "percentile",
+          "description": "The percentile threshold used to determine the appropriate comparative level of an event or measurement. Must be an integer in the range [0,100]. Defaults to 50",
+          "required": false,
+          "default": 50
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "in/day"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "precipitation_threshold",
+      "label": "Precipitation Threshold",
+      "description": "Number of days where precipitation rate, generated from daily data using all requested models, fulfils the comparison",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "pr"
+      ],
+      "available_units": [
+        "days"
+      ],
+      "default_units": "days",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "threshold",
+          "description": "Required. The value against which to compare climate data values in the unit specified by the 'threshold_units' parameter.",
+          "required": true
+        },
+        {
+          "name": "threshold_comparator",
+          "description": "Required. The comparison type against the value of the 'threshold' parameter. Options: lt, gt, lte, gte. Signify: less than, greater than, less than or equals...",
+          "required": true
+        },
+        {
+          "name": "threshold_units",
+          "description": "Required. Units for the value of the 'threshold' parameter. Must be a valid unit recognized by the API. Options: ['kg/m^2/s', 'mm/day', 'in/day']",
+          "required": true
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "days"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    },
+    {
+      "name": "total_precipitation",
+      "label": "Total Precipitation",
+      "description": "Total precipitation",
+      "valid_aggregations": [
+        "yearly",
+        "quarterly",
+        "monthly",
+        "offset_yearly",
+        "custom"
+      ],
+      "variables": [
+        "pr"
+      ],
+      "available_units": [
+        "kg/m^2",
+        "mm",
+        "in"
+      ],
+      "default_units": "in",
+      "parameters": [
+        {
+          "name": "agg",
+          "description": "A list of comma separated aggregation types to return. Valid choices are 'min', 'max', 'avg', 'median', 'stddev', 'stdev', and 'XXth'. If using 'XXth', replace the XX with a number between 1-99 to return that percentile. For example, '99th' returns the value of the 99th percentile. The 'XXth' option can be provided multiple times with different values. 'stdev' is an alias to 'stddev'. Defaults to 'min,max,avg'.",
+          "required": false,
+          "default": "min,max,avg"
+        },
+        {
+          "name": "custom_time_agg",
+          "description": "Used in conjunction with the 'custom' time_aggregation value. A list of comma separated month-day pairs defining the time intervals to aggregate within. Data points will only be assigned to one aggregation, and for overlapping intervals the interval defined first will take precedence. Dates are formmatted MM-DD and pairs are formatted 'start:end'. Examples: '3-1:5-31', '1-1:6-30,7-1:12-31'",
+          "required": false
+        },
+        {
+          "name": "dataset",
+          "description": "A single value defining which provider to use for raw climate data. If not provided, defaults to NEX-GDDP.",
+          "required": false,
+          "default": "NEX-GDDP"
+        },
+        {
+          "name": "models",
+          "description": "A list of comma separated model names to filter the indicator by. The indicator values in the response will only use the selected models. If not provided, defaults to all models.",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "time_aggregation",
+          "description": "Time granularity to group data by for result structure. Valid aggregations depend on indicator. Can be 'yearly', 'offset_yearly', 'quarterly', 'monthly', or 'custom'. Defaults to 'yearly'. If 'custom', 'custom_time_agg' parameter must be set.",
+          "required": false,
+          "default": "yearly"
+        },
+        {
+          "name": "units",
+          "description": "Units in which to return the data. Defaults to Imperial units (Fahrenheit for temperature indicators and inches for precipitation).",
+          "required": false,
+          "default": "in"
+        },
+        {
+          "name": "years",
+          "description": "A list of comma separated year ranges to filter the response by. Defaults to all years available. A year range is of the form 'start[:end]'. Examples: '2010', '2010:2020', '2010:2020,2030', '2010:2020,2030:2040'",
+          "required": false,
+          "default": "all"
+        }
+      ]
+    }
+  ]

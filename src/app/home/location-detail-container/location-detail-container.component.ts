@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "src/app/services/data.service";
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { Observable, forkJoin } from "rxjs";
 
@@ -11,20 +11,37 @@ import { Observable, forkJoin } from "rxjs";
 })
 export class LocationDetailContainerComponent implements OnInit {
   public data: Observable<any>;
+  public id: string;
   constructor(
     private dataService: DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.data = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        let id = params.get("id");
-        return forkJoin([
-          this.dataService.getMaxTempAverage(id),
-          this.dataService.getMinTempAverage(id)
-        ]);
+        this.id = params.get("id");
+        return this.getData(this.id, true);
       })
     );
+  }
+
+  public getData(id: string, historical: boolean) {
+    return forkJoin([
+      this.dataService.getMaxTempAverage(id, historical),
+      this.dataService.getMinTempAverage(id, historical),
+      this.dataService.getExtremeColdEvents(id, historical),
+      this.dataService.getExtremeHeatEvents(id, historical),
+      this.dataService.getExtremePrecipEvents(id, historical)
+    ]);
+  }
+
+  public routeBack() {
+    this.router.navigate([""]);
+  }
+
+  public getDataWithNewType(type: boolean) {
+    this.data = this.getData(this.id, !type);
   }
 }

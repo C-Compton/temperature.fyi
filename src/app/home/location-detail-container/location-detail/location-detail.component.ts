@@ -3,7 +3,9 @@ import {
   OnInit,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  Output,
+  EventEmitter
 } from "@angular/core";
 import * as Highcharts from "highcharts";
 
@@ -14,9 +16,12 @@ import * as Highcharts from "highcharts";
 })
 export class LocationDetailComponent implements OnInit, OnChanges {
   @Input() data: any;
+  @Output() back: EventEmitter<any> = new EventEmitter();
+  @Output() dataType: EventEmitter<boolean> = new EventEmitter();
+  public historical: boolean = false;
   public Highcharts: typeof Highcharts = Highcharts;
   public loading: boolean = true;
-  public chartOptions: any = {
+  public chartOptions1: any = {
     series: [
       {
         data: [1, 2, 3],
@@ -41,6 +46,37 @@ export class LocationDetailComponent implements OnInit, OnChanges {
       text: "Average Min / Max Temperatures"
     }
   };
+
+  public chartOptions2: any = {
+    series: [
+      {
+        data: [1, 2, 3],
+        type: "line",
+        name: "Extreme Heat Events"
+      },
+      {
+        data: [1, 2, 3],
+        type: "line",
+        name: "Extreme Cold Events"
+      },
+      {
+        data: [1, 2, 3],
+        type: "line",
+        name: "Extreme Precipitation Events"
+      }
+    ],
+    xAxis: {
+      categories: []
+    },
+    yAxis: {
+      title: {
+        text: "Count"
+      }
+    },
+    title: {
+      text: "Extreme Weather Events"
+    }
+  };
   public updateFlag: boolean = false;
 
   constructor() {}
@@ -48,22 +84,46 @@ export class LocationDetailComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   public ngOnChanges(changes: SimpleChanges) {
-    if (!changes.data.firstChange) {
+    if (!changes.data.firstChange && changes.data.currentValue != undefined) {
       this.loading = false;
-      console.log(this.data[0].data);
-      this.chartOptions.series[0].data = Object.keys(
+      this.chartOptions1.series[0].data = Object.keys(
         this.data[0].data
       ).map(i => [i, +this.data[0].data[i].avg.toFixed(2)]);
 
-      this.chartOptions.series[1].data = Object.keys(
+      this.chartOptions1.series[1].data = Object.keys(
         this.data[1].data
       ).map(i => [i, +this.data[1].data[i].avg.toFixed(2)]);
 
-      this.chartOptions.xAxis.categories = Object.keys(
+      this.chartOptions1.xAxis.categories = Object.keys(
         this.data[0].data
       ).map(i => [i.substr(0, 4)]);
 
+      this.chartOptions2.series[1].data = Object.keys(
+        this.data[2].data
+      ).map(i => [i, +this.data[2].data[i].max]);
+
+      this.chartOptions2.series[0].data = Object.keys(
+        this.data[3].data
+      ).map(i => [i, +this.data[3].data[i].max]);
+
+      this.chartOptions2.series[2].data = Object.keys(
+        this.data[4].data
+      ).map(i => [i, +this.data[4].data[i].max]);
+
+      this.chartOptions2.xAxis.categories = Object.keys(
+        this.data[2].data
+      ).map(i => [i]);
+
       this.updateFlag = true;
     }
+  }
+
+  public dataTypeChange() {
+    this.loading = true;
+    this.dataType.emit(this.historical);
+  }
+
+  public backClick() {
+    this.back.emit();
   }
 }

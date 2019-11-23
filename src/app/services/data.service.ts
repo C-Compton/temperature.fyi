@@ -15,12 +15,15 @@ export class DataService {
     let headers = new HttpHeaders();
     headers.append("Accept", "application/json");
     headers.append("Content-Type", "application/json");
-    return this.http.get(URL + "city/?search=" + searchString, {
-      headers: headers
-    });
+    return this.http.get(
+      URL + "city/?search=" + searchString + "&ordering=population",
+      {
+        headers: headers
+      }
+    );
   }
 
-  public getCityData(cityId: string): Observable<any> {
+  public getCityData(cityId: string, historical: boolean): Observable<any> {
     let headers = new HttpHeaders();
     headers.append("Accept", "application/json");
     headers.append("Content-Type", "application/json");
@@ -29,22 +32,45 @@ export class DataService {
     });
   }
 
-  public getMaxTempAverage(cityId: string): Observable<any> {
+  public getMaxTempAverage(
+    cityId: string,
+    historical: boolean
+  ): Observable<any> {
     let headers = new HttpHeaders();
+    let scenario = historical ? "/historical/" : "/RCP85/";
+    let time_aggregation;
+    if (scenario == "/historical/") {
+      time_aggregation = "quarterly";
+    } else {
+      time_aggregation = "yearly";
+    }
     headers.append("Accept", "application/json");
     headers.append("Content-Type", "application/json");
     return this.http.get(
       URL +
         "climate-data/" +
         cityId +
-        "/historical/indicator/average_high_temperature/?time_aggregation=quarterly&agg=avg",
+        scenario +
+        "indicator/average_high_temperature/?time_aggregation=" +
+        time_aggregation +
+        "&agg=avg",
       {
         headers: headers
       }
     );
   }
 
-  public getMinTempAverage(cityId: string): Observable<any> {
+  public getMinTempAverage(
+    cityId: string,
+    historical: boolean
+  ): Observable<any> {
+    let scenario = historical ? "/historical/" : "/RCP85/";
+    let time_aggregation;
+    if (scenario == "/historical/") {
+      time_aggregation = "quarterly";
+    } else {
+      time_aggregation = "yearly";
+    }
     let headers = new HttpHeaders();
     headers.append("Accept", "application/json");
     headers.append("Content-Type", "application/json");
@@ -52,7 +78,70 @@ export class DataService {
       URL +
         "climate-data/" +
         cityId +
-        "/historical/indicator/average_low_temperature/?time_aggregation=quarterly&agg=avg",
+        scenario +
+        "indicator/average_low_temperature/?time_aggregation=" +
+        time_aggregation +
+        "&agg=avg",
+      {
+        headers: headers
+      }
+    );
+  }
+
+  public getExtremeColdEvents(
+    cityId: string,
+    historical: boolean
+  ): Observable<any> {
+    let scenario = historical ? "/historical/" : "/RCP85/";
+    let headers = new HttpHeaders();
+    headers.append("Accept", "application/json");
+    headers.append("Content-Type", "application/json");
+    return this.http.get(
+      URL +
+        "climate-data/" +
+        cityId +
+        scenario +
+        "indicator/extreme_cold_events/?agg=max",
+      {
+        headers: headers
+      }
+    );
+  }
+
+  public getExtremeHeatEvents(
+    cityId: string,
+    historical: boolean
+  ): Observable<any> {
+    let scenario = historical ? "/historical/" : "/RCP85/";
+    let headers = new HttpHeaders();
+    headers.append("Accept", "application/json");
+    headers.append("Content-Type", "application/json");
+    return this.http.get(
+      URL +
+        "climate-data/" +
+        cityId +
+        scenario +
+        "indicator/extreme_heat_events/?agg=max",
+      {
+        headers: headers
+      }
+    );
+  }
+
+  public getExtremePrecipEvents(
+    cityId: string,
+    historical: boolean
+  ): Observable<any> {
+    let scenario = historical ? "/historical/" : "/RCP85/";
+    let headers = new HttpHeaders();
+    headers.append("Accept", "application/json");
+    headers.append("Content-Type", "application/json");
+    return this.http.get(
+      URL +
+        "climate-data/" +
+        cityId +
+        scenario +
+        "indicator/extreme_precipitation_events/?agg=max",
       {
         headers: headers
       }

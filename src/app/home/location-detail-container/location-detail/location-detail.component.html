@@ -1,22 +1,58 @@
 <div *ngIf="data">
-  <div>
-    <h1 nz-title>
-      {{ data[0].city.properties.name }}, {{ data[0].city.properties.admin }}
-    </h1>
+  <div
+    nz-row
+    nzType="flex"
+    nzJustify="space-between"
+    nzAlign="middle"
+    class="mb-2"
+  >
+    <div nz-col>
+      <h1 nz-title>
+        {{ data[0].city.properties.name }}, {{ data[0].city.properties.admin }}
+      </h1>
+    </div>
+    <div nz-col>
+      <button nz-button nzType="primary" (click)="backClick()">
+        Back
+      </button>
+    </div>
   </div>
-  <div>
+  <div class="mb-2">
     <h4 nz-title>Population: {{ data[0].city.properties.population }}</h4>
   </div>
+  <div class="mb-2">
+    <div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col>
+        <h4 nz-title>
+          Corodinates: {{ data[0].city.geometry.coordinates[0] }} ,
+          {{ data[0].city.geometry.coordinates[1] }}
+        </h4>
+      </div>
+      <div nz-col>
+        <nz-switch
+          [(ngModel)]="historical"
+          [nzCheckedChildren]="checkedTemplate"
+          [nzUnCheckedChildren]="unCheckedTemplate"
+          (ngModelChange)="dataTypeChange()"
+        ></nz-switch>
+        <ng-template #checkedTemplate>Future</ng-template>
+        <ng-template #unCheckedTemplate>Historical</ng-template>
+      </div>
+    </div>
+  </div>
+  <nz-divider></nz-divider>
   <div>
-    <h4 nz-title>
-      Corodinates: {{ data[0].city.geometry.coordinates[0] }} ,
-      {{ data[0].city.geometry.coordinates[1] }}
-    </h4>
+    <highcharts-chart
+      [Highcharts]="Highcharts"
+      [options]="chartOptions1"
+      [(update)]="updateFlag"
+      style="width: 100%; height: 400px; display: block;"
+    ></highcharts-chart>
   </div>
   <div>
     <highcharts-chart
       [Highcharts]="Highcharts"
-      [options]="chartOptions"
+      [options]="chartOptions2"
       [(update)]="updateFlag"
       style="width: 100%; height: 400px; display: block;"
     ></highcharts-chart>

@@ -1,1 +1,5 @@
-<app-location-detail [data]="data | async"></app-location-detail>
+<app-location-detail
+  [data]="data | async"
+  (back)="routeBack()"
+  (dataType)="getDataWithNewType($event)"
+></app-location-detail>

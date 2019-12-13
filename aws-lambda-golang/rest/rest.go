@@ -47,7 +47,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		}, nil
 	}
 
-	api_url, present := os.LookupEnv("API_URL")
+	apiURL, present := os.LookupEnv("API_URL")
 	if present == false {
 		returnCode = 500
 		returnBody = "Server side error"
@@ -58,7 +58,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		}, nil
 	}
 
-	api_key, present := os.LookupEnv("API_KEY")
+	apiKey, present := os.LookupEnv("API_KEY")
 	if present == false {
 		returnCode = 500
 		returnBody = "Server side error"
@@ -69,24 +69,24 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		}, nil
 	}
 
-	requestUrl := strings.Replace(request.Path, PATH_TO_LAMBDA, api_url, -1)
+	requestURL := strings.Replace(request.Path, PATH_TO_LAMBDA, apiURL, -1)
 
 	i := 0
 	l := len(request.QueryStringParameters)
 	if l > 0 {
-		requestUrl = requestUrl + "?"
+		requestURL = requestURL + "?"
 		for key, value := range request.QueryStringParameters {
-			requestUrl = requestUrl + key + "=" + value
+			requestURL = requestURL + key + "=" + value
 			i++
 			if i < l {
-				requestUrl += "&"
+				requestURL += "&"
 			}
 		}
 	}
 
-	log.Println("Request URL: " + requestUrl)
+	log.Println("Request URL: " + requestURL)
 
-	myRequest, err := http.NewRequest(http.MethodGet, requestUrl, nil)
+	myRequest, err := http.NewRequest(http.MethodGet, requestURL, nil)
 	if err != nil {
 		returnCode = 500
 		returnBody = "Server side error"
@@ -97,7 +97,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		}, err
 	}
 
-	myRequest.Header.Add("Authorization", api_key)
+	myRequest.Header.Add("Authorization", apiKey)
 	myRequest.Header.Add("Accept", "application/json")
 
 	client := &http.Client{}
@@ -106,7 +106,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	if err != nil {
 		returnCode = resp.StatusCode
 		returnBody = resp.Body.Close().Error()
-		log.Println("Error reaching " + requestUrl)
+		log.Println("Error reaching " + requestURL)
 		return &events.APIGatewayProxyResponse{
 			StatusCode: returnCode,
 			Body:       returnBody,
